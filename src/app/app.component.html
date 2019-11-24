@@ -1,0 +1,37 @@
+<div class="nav-row" [ngClass]="{bottomNavigation: scrollNavigatedBottom}">
+  <nav>
+    <ul>
+      <li [ngClass]="{active: selectedMenuItem.name === menuItem.name}" *ngFor="let menuItem of menuLinks; let isLast=last"
+          (click)="navigateToLink(menuItem)">{{menuItem.name}}
+      </li>
+    </ul>
+  </nav>
+</div>
+<div class="main-grid">
+  <div class="banner">
+    <div class="title">
+      <h1>
+        Barak Josef
+      </h1>
+    </div>
+    <div class="sub-title">
+      <h2>Software Developer</h2>
+    </div>
+  </div>
+  <div class="side-menu">
+    Side Content
+  </div>
+  <div class="container">
+    <div class="section-title">
+{{selectedMenuItem.title}}
+    </div>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div class="footer-row">
+    <footer>
+      Footer
+    </footer>
+  </div>
+</div>

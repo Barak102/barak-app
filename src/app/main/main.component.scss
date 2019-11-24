@@ -1,0 +1,25 @@
+.link {
+  cursor: pointer;
+}
+
+  .div-model {
+    width: 400px;
+    display: inline-block;
+    height: 200px;
+    background-color: red;
+
+    .div-content {
+      background-color: blue;
+    }
+  }
+
+.div-model-2 {
+  width: 400px;
+  display: inline-block;
+  height: 200px;
+  background-color: green;
+
+  .div-content {
+    background-color: orange;
+  }
+}

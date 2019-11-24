@@ -1,0 +1,27 @@
+<p>main works!</p>
+
+<div>
+  <div (click)="routeTo('sub')" class="link">
+Sub Link
+  </div>
+  <div (click)="routeTo('other')" class="link">
+Other Link
+  </div>
+</div>
+
+filter: <input [(ngModel)]="termFilter">
+<input type="checkbox"  [(ngModel)]="isCaseSensitive"/> case sensitive
+
+<div *ngFor="let item of ['Amir','Shahar','Barak', 'Ran', 'Kobi', 'Kosta', 'Liora', 'Shiran Tal', 'Dubi'] |  myFilter: termFilter:isCaseSensitive">
+  {{item}}
+</div>
+
+
+<div class="div-model">
+<div class="div-content">Content</div>
+</div>
+<div class="div-model-2">
+  <div class="div-content">Content</div>
+</div>
+
+<router-outlet></router-outlet>
