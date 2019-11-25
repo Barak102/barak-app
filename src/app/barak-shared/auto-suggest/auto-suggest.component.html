@@ -1,7 +1,6 @@
 <div class="auto-suggest-input">
-    <input #searchTextInput [(ngModel)]="searchText" (focus)="inputOnFocus()" (blur)="inputOnBlur()"/>
+    <input #searchTextInput class="text-input" [(ngModel)]="searchText" (focus)="inputOnFocus()" (input)="inputOnFocus()"/>
 </div>
 <app-input-results *ngIf="inputIsOnFocus && (results.length > 0 || isLoadingResultsFromServer)"
-    [textFilter]="pipeTextFiltering"
-    [itemCollection]="results"
-    [displayLoading]="isLoadingResultsFromServer"></app-input-results>
+    [textFilter]="pipeTextFiltering" [itemCollection]="results" [displayLoading]="isLoadingResultsFromServer"
+    (itemSelectedHandler)="itemSelectionHandler($event)"></app-input-results>

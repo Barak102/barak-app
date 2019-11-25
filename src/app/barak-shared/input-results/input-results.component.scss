@@ -1,6 +1,31 @@
 .input-results {
     position: absolute;
-    background-color: #c0c0c0;
+    background-color: #f3f3f3;
     border: #000000 1px solid;
     width: fit-content;
+
+    ul {
+        font-family: sans-serif;
+        padding: 0;
+        margin: 0;
+
+        li {
+            cursor: pointer;
+            list-style-type: none;
+            padding-top: 10px;
+            padding-right: 10px;
+            padding-left: 10px;
+            height: 25px;
+            &:hover, &.selected {
+                background-color: #e4e3e0;
+            }
+        }
+
+    }
+
+    .loading-div {
+        font-size: 24px;
+        font-family: sans-serif;
+        padding: 10px;
+    }
 }

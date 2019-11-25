@@ -1,5 +1,16 @@
+  .auto-suggest-input {
+    .text-input {
+      width: 220px;
+      height: 30px;
+      border-radius: 3px;
+      border: #c1bcbc 1px solid;
+      background-color: #fffaf0;
+      padding-left: 10px;
+    }
+  }
+
   app-input-results {
-     .input-results {
-         min-width: 150px;
-     }
-}
+    .input-results {
+      min-width: 230px;
+    }
+  }

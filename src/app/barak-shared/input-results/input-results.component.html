@@ -1,8 +1,12 @@
 <div class="input-results">
     <ul>
-        <li class="result-item" *ngFor="let item of itemCollection | myFilter: textFilter : false">{{item}}</li>
+        <li class="result-item"
+        *ngFor="let item of itemCollection | myFilter: textFilter : false; let ind = index;"
+        [ngClass]="{'selected': ind === selectedIndex}" (click)="selectValue(ind)">
+            {{item}}
+        </li>
         </ul>
-        <div *ngIf="displayLoading">
-                Loading results from server...
+        <div *ngIf="displayLoading" class="loading-div">
+                Loading...
         </div>
 </div>

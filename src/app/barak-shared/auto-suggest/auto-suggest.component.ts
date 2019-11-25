@@ -15,13 +15,20 @@ export class AutoSuggestComponent implements OnInit, AfterViewInit {
   public pipeTextFiltering: string = '';
   public isLoadingResultsFromServer: boolean = false;
   public inputIsOnFocus: boolean = false;
-  @ViewChild('searchTextInput', {static: true}) searchTextInput: ElementRef;
+  public _selectedValue: any;
 
+
+  set selectedValue(value: any) {
+    this._selectedValue = value;
+    this.searchText = this._selectedValue;
+  }
+
+  @ViewChild('searchTextInput', { static: true }) searchTextInput: ElementRef;
   public results: any[] = [];
 
   private debounceTiming: any = {
     typing: 100, // 100
-    pipe: 2000, // 3000
+    pipe: 2000, // 2000
     api: 2000, // 2000
   };
 
@@ -35,30 +42,40 @@ export class AutoSuggestComponent implements OnInit, AfterViewInit {
   }
 
   filteredResults(itemsCollection: any[]): any[] {
-    return this.filterPipe.transform(itemsCollection, this.pipeTextFiltering , false);
+    return this.filterPipe.transform(itemsCollection, this.pipeTextFiltering, false);
   }
 
   inputOnFocus(): void {
-    this.inputIsOnFocus = true;
+    this.openResults();
   }
   inputOnBlur(): void {
     this.inputIsOnFocus = false;
   }
 
 
-  ngAfterViewInit(): void {
-  const apiSubscribe$: any = of(['Barak Josef' , 'Shiran Tal' , 'Ran bahar', 'Kosta Masliansky',
-  'Liora Twig', 'Dubi Grinfeld', 'Amir Sherer', 'Shahar Horn']).pipe(
-    tap(() => this.isLoadingResultsFromServer = true),
-    delay(this.debounceTiming.api));
+  openResults(): void {
+    this.inputIsOnFocus = true;
+  }
 
-  const pipeSubscribe$: any = of(this.pipeTextFiltering);
-  fromEvent(this.searchTextInput.nativeElement, 'input').pipe(
+  closeResults(): void {
+    this.inputIsOnFocus = false;
+  }
+
+
+  ngAfterViewInit(): void {
+    const apiSubscribe$: any = of(['Barak Josef', 'Shiran Tal', 'Ran bahar', 'Kosta Masliansky',
+      'Liora Twig', 'Dubi Grinfeld', 'Amir Sherer', 'Shahar Horn']).pipe(
+        tap(() => this.isLoadingResultsFromServer = true),
+        delay(this.debounceTiming.api));
+
+    const pipeSubscribe$: any = of(this.pipeTextFiltering);
+    fromEvent(this.searchTextInput.nativeElement, 'input').pipe(
       debounceTime(this.debounceTiming.typing),
       tap(r => {
         this.pipeTextFiltering = this.searchText;
         console.log(`filtering in pipe for the text: ${this.pipeTextFiltering}`)
-        ; }),
+          ;
+      }),
       switchMap(s => pipeSubscribe$),
       debounceTime(this.debounceTiming.pipe),
       tap(() => {
@@ -71,7 +88,7 @@ export class AutoSuggestComponent implements OnInit, AfterViewInit {
       })
     ).subscribe((r: any[]) => {
       console.log('Get results from server');
-      if(this.filteredResults(r).length === 0) {
+      if (this.filteredResults(r).length === 0) {
         this.results = r;
       } else {
         this.results = this.filteredResults(this.results);
@@ -87,6 +104,12 @@ export class AutoSuggestComponent implements OnInit, AfterViewInit {
       this.isLoadingResultsFromServer = false;
       this.pipeTextFiltering = '';
     });
+  }
+
+  itemSelectionHandler(selectedItem: any): void {
+    this.searchText = selectedItem;
+    this.pipeTextFiltering = selectedItem;
+    this.closeResults();
   }
 
 }
