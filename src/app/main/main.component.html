@@ -11,7 +11,6 @@ Other Link
 
 filter: <input [(ngModel)]="termFilter">
 <input type="checkbox"  [(ngModel)]="isCaseSensitive"/> case sensitive
-
 <div *ngFor="let item of ['Amir','Shahar','Barak', 'Ran', 'Kobi', 'Kosta', 'Liora', 'Shiran Tal', 'Dubi'] |  myFilter: termFilter:isCaseSensitive">
   {{item}}
 </div>
