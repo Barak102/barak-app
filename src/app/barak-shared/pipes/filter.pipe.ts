@@ -1,4 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
+import {ICollectionItem} from '../types/ICollectionItem';
 
 @Pipe({
   name: 'myFilter',
@@ -6,10 +7,10 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(items: any[], term, isCaseSensitive: boolean): any {
+  transform(items: ICollectionItem[], term, isCaseSensitive: boolean): any {
     //console.log(`term: ${term}, isCaseSensitive: ${isCaseSensitive}`);
     // tslint:disable-next-line: max-line-length
-    return term ? items.filter(item => !isCaseSensitive ? item.toString().toLowerCase().indexOf(term.toLowerCase()) !== -1  : item.indexOf(term) !== -1) : items;
+    return term ? items.filter(item => !isCaseSensitive ? item.name.toString().toLowerCase().indexOf(term.toLowerCase()) !== -1 : item.name.indexOf(term) !== -1) : items;
   }
 
 }

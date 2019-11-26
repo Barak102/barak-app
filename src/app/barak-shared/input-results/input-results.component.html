@@ -2,8 +2,8 @@
     <ul>
         <li class="result-item"
         *ngFor="let item of itemCollection | myFilter: textFilter : false; let ind = index;"
-        [ngClass]="{'selected': ind === selectedIndex}" (click)="selectValue(ind)">
-            {{item}}
+        [ngClass]="{'selected': ind === selectedIndex}" (click)="selectValue(ind)" (mouseenter)="mouseEnterHandler(ind)" (mouseleave)="mouseLeaveHandler()">
+            {{item.name}}
         </li>
         </ul>
         <div *ngIf="displayLoading" class="loading-div">

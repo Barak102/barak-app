@@ -1,6 +1,7 @@
-import { FilterPipe } from './../pipes/filter.pipe';
-import { Component, OnInit, ViewEncapsulation, Input, HostListener, Output, EventEmitter } from '@angular/core';
-import { Subject } from 'rxjs';
+import {Component, EventEmitter, HostListener, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {Subject} from 'rxjs';
+import {ICollectionItem} from '../types/ICollectionItem';
+import {FilterPipe} from '../pipes/filter.pipe';
 
 @Component({
   selector: 'app-input-results',
@@ -9,18 +10,20 @@ import { Subject } from 'rxjs';
   encapsulation: ViewEncapsulation.None
 })
 export class InputResultsComponent implements OnInit {
-  
+
   @Input() public displayLoading: boolean = false;
   @Input() public changeSelectedIndex: Subject<number>;
-  
-  private _itemCollection: any;
 
-  get itemCollection(): any {
+  private _itemCollection: ICollectionItem[];
+  public mouseEntered: boolean = false;
+
+
+  get itemCollection(): ICollectionItem[] {
     return this._itemCollection;
   }
 
   @Input('itemCollection')
-  set itemCollection(value: any) {
+  set itemCollection(value: ICollectionItem[]) {
     this._itemCollection = value;
     if (this.selectedIndex > this._itemCollection.length) {
       this.selectedIndex = -1;
@@ -40,7 +43,7 @@ export class InputResultsComponent implements OnInit {
       this.selectedIndex = -1;
     }
   }
-  
+
   @Output() itemSelectedHandler = new EventEmitter();
 
 
@@ -52,7 +55,8 @@ export class InputResultsComponent implements OnInit {
   public selectedIndex: number = -1;
 
 
-  constructor(private filterPipe: FilterPipe) { }
+  constructor(private filterPipe: FilterPipe) {
+  }
 
   ngOnInit(): void {
 
@@ -67,7 +71,7 @@ export class InputResultsComponent implements OnInit {
   }
 
   changeIndex(ind: number): void {
-    if (ind < this.itemCollectionFiltered().length && ind > -1) {
+    if (ind < this.itemCollectionFiltered().length && ind > -1 && !this.mouseEntered) {
       this.selectedIndex = ind;
       console.log(`Selected index: ${this.selectedIndex}`);
     }
@@ -84,10 +88,18 @@ export class InputResultsComponent implements OnInit {
       case 'ArrowDown':
         this.changeIndex(++currentIndex);
         break;
-        case 'Enter':
-          this.selectValue(this.selectedIndex);
-          break;
+      case 'Enter':
+        this.selectValue(this.selectedIndex);
+        break;
     }
   }
 
+  mouseEnterHandler(ind: number) {
+    this.changeIndex(ind);
+    this.mouseEntered = true;
+  }
+
+  mouseLeaveHandler() {
+    this.mouseEntered = false;
+  }
 }
