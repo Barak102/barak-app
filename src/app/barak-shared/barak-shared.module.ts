@@ -6,18 +6,23 @@ import {FormsModule} from '@angular/forms';
 import {InputResultsComponent} from './input-results/input-results.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FilterPipe} from './pipes/filter.pipe';
-
+import {MatProgressSpinnerModule, MatSpinner} from '@angular/material/progress-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ComponentViewComponent } from './component-view/component-view.component';
 @NgModule({
   declarations: [
     AutoSuggestComponent,
     InputResultsComponent,
-    FilterPipe
+    FilterPipe,
+    ComponentViewComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
+    MatProgressSpinnerModule,
   ],
   exports: [AutoSuggestComponent, FilterPipe]
 })

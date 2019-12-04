@@ -1,12 +1,12 @@
 <div class="input-results">
     <ul>
         <li class="result-item"
-        *ngFor="let item of itemCollection | myFilter: textFilter : false; let ind = index;"
+        *ngFor="let item of itemCollection | myFilter: textFilter : true; let ind = index;"
         [ngClass]="{'selected': ind === selectedIndex}" (click)="selectValue(ind)" (mouseenter)="mouseEnterHandler(ind)" (mouseleave)="mouseLeaveHandler()">
             {{item.name}}
         </li>
         </ul>
         <div *ngIf="displayLoading" class="loading-div">
-                Loading...
+               <mat-spinner [mode]="'indeterminate'" [color]="'primary'" [strokeWidth]="'5'" [diameter]="25"></mat-spinner>
         </div>
 </div>

@@ -14,6 +14,7 @@ import { ArticlesComponent } from './articles/articles.component';
 import { ContactComponent } from './contact/contact.component';
 import { BarakSharedModule } from './barak-shared/barak-shared.module';
 import { FilterPipe } from './barak-shared/pipes/filter.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { FilterPipe } from './barak-shared/pipes/filter.pipe';
     AppRoutingModule,
     FormsModule,
     BarakSharedModule,
+    BrowserAnimationsModule,
   ],
   providers: [FilterPipe],
   bootstrap: [AppComponent]

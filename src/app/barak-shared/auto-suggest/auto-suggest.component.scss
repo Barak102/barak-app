@@ -7,6 +7,16 @@
       background-color: #fffaf0;
       padding-left: 10px;
     }
+
+    .mat-spinner {
+      display: none;
+      width: 20px; 
+      height: 20px;
+      svg {
+        width: 20px;
+        height: 20px;
+      } 
+    }
   }
 
   app-input-results {
@@ -14,3 +24,4 @@
       min-width: 230px;
     }
   }
+
