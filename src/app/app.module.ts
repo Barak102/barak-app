@@ -15,6 +15,7 @@ import { ContactComponent } from './contact/contact.component';
 import { BarakSharedModule } from './barak-shared/barak-shared.module';
 import { FilterPipe } from './barak-shared/pipes/filter.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SideBarContentComponent } from './side-bar-content/side-bar-content.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PortfolioComponent,
     ArticlesComponent,
     ContactComponent,
+    SideBarContentComponent,
   ],
   imports: [
     BrowserModule,

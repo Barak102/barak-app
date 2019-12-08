@@ -1,5 +1,6 @@
-import {AfterViewInit, Component, HostListener, OnInit} from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
+import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { IMenuItem } from './barak-shared/types/IMenuItem';
 
 @Component({
   selector: 'app-root',
@@ -7,14 +8,38 @@ import {NavigationEnd, Router} from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'barakApp';
+  title = 'Barak Josef Software Developer';
   scrollNavigatedBottom = false;
-  selectedMenuItem: any = null;
-  menuLinks: any[] = [
-    {name: 'Home', navigateTo: '', isActive: true},
-    {name: 'Portfolio', navigateTo: 'portfolio', isActive: false},
-    {name: 'Articles', navigateTo: 'articles', isActive: false},
-    {name: 'Contact', navigateTo: 'contact', isActive: false},
+  selectedMenuItem: IMenuItem = null;
+  menuLinks: IMenuItem[] = [
+    { name: 'Home', navigateTo: '', isSelected: true },
+    {
+      name: 'Portfolio', navigateTo: 'portfolio', isSelected: false, title: 'My portfolio',
+      children: [
+        {
+        name: 'Auto Suggest',
+        navigateTo: '',
+        isSelected: false,
+      },
+      {
+        name: 'Dropdown',
+        navigateTo: '',
+        isSelected: false
+      },
+      {
+        name: 'Calendar',
+        navigateTo: '',
+        isSelected: false
+      },
+      {
+        name: 'Gallery',
+        navigateTo: '',
+        isSelected: false
+      },
+    ]
+    },
+    { name: 'Articles', navigateTo: 'articles', isSelected: false, title: 'Articles' },
+    { name: 'Contact', navigateTo: 'contact', isSelected: false, title: 'Contract me' },
   ];
 
   constructor(public router: Router) {
@@ -38,10 +63,10 @@ export class AppComponent implements OnInit {
     });
   }
 
-  navigateToLink(menuItem: any): void {
-    this.menuLinks.forEach(i => i.isActive = false);
+  navigateToLink(menuItem: IMenuItem): void {
+    this.menuLinks.forEach(i => i.isSelected = false);
     console.log(`Navigating to ${menuItem.navigateTo}`);
-    menuItem.isActive = true;
+    menuItem.isSelected = true;
     this.selectedMenuItem = menuItem;
     this.router.navigate([menuItem.navigateTo]);
   }

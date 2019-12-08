@@ -59,7 +59,6 @@ export class InputResultsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     if (this.changeSelectedIndex) {
       this.changeSelectedIndex.subscribe(n => this.changeIndex(n));
     }

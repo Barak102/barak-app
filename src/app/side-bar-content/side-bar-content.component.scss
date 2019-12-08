@@ -1,0 +1,38 @@
+.menuItems-container {
+    background: rgb(234, 234, 234);
+    background: linear-gradient(180deg, rgba(234, 234, 234, 1) 0%, rgba(255, 255, 255, 1) 80%);
+    height: 500px;
+    padding: 20px 0;
+    border-radius: 5px;
+    min-height: 86vh;
+    max-height: 86vh;
+
+    ul {
+        margin: 0;
+        padding-left: 0;
+
+        li {
+            cursor: pointer;
+            transition: 0.1s;
+            list-style-type: none;
+            padding-top: 20px;
+            padding-left: 20px;
+            padding-bottom: 20px;
+            font-family: sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            color: #5f4c4c;
+            opacity: 0.8;
+
+            &:hover {
+                color: #000000;
+                font-size: 20px;
+                text-decoration: underline;
+                opacity: 1;
+                background-color: #ffffff;
+                border: #ededed 1px solid;
+                border-right: 0;
+            }
+        }
+    }
+}

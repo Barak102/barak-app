@@ -1,14 +1,14 @@
 :host {
   .nav-row {
     width: calc(100% - 16px);
-    height: 38px;
+    height: 50px;
     top: 0;
     position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgb(61,188,214);
-    background: linear-gradient(180deg, rgba(61,188,214,1) 0%, rgba(255,255,255,1) 100%);
+    background: #ebebeb;
+    background: linear-gradient(180deg, #ebebeb 0%, rgba(255,255,255,1) 100%);
     transition: 0.3s;
 
     &.bottomNavigation {
@@ -30,6 +30,7 @@
           float: left;
           padding: 10px;
           transition: 0.2s;
+          font-size: 24px;
 
           &.active {
             background-color: #ffffff;
@@ -47,17 +48,18 @@
 
 
   .main-grid {
+    margin-top: 60px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 50px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: minmax(1fr, 150px) minmax(1fr, 45px) 1fr 1fr 1fr 1fr 1fr 1fr 50px;
     width: 90%;
 
 
     .banner {
       width: 100%;
       height: 150px;
-      grid-column-start: 1;
-      grid-column-end: 9;
+      grid-column-start: 3;
+      grid-column-end: 11;
       grid-row-start: 1;
       grid-row-end: 2;
       padding-left: 30px;
@@ -74,34 +76,40 @@
 
     .container {
       grid-column-start: 3;
-      grid-column-end: 9;
+      grid-column-end: 11;
       grid-row-start: 2;
       grid-row-end: 8;
       background-color: #FDFDFD;
         padding: 10px;
 
+        min-height: 73vh;
       .section-title {
+        h3 {
+          font-family: sans-serif;
+        }
+        .separator {
 
+        }
       }
 
       .content {
         background:none;
+        padding: 20px;
       }
     }
 
     .side-menu {
       align-items: start;
-      background-color: #778899;
       grid-column-start: 1;
       grid-column-end: 3;
-      grid-row-start: 2;
+      grid-row-start: 1;
       grid-row-end: 8;
-      padding: 10px;
+      //padding: 10px;
     }
 
     .footer-row {
       grid-column-start: 1;
-      grid-column-end: 9;
+      grid-column-end: 11;
       grid-row-start: 8;
       grid-row-end: 9;
     }

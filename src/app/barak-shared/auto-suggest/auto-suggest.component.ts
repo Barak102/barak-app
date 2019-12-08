@@ -1,21 +1,19 @@
 import { debounceTime, delay, map, skip, skipWhile, switchMap, tap } from 'rxjs/operators';
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation, HostListener, Input } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation, HostListener, Input, OnChanges, SimpleChanges, AfterContentInit, DoCheck, OnDestroy } from '@angular/core';
 import { fromEvent, of, Subject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FilterPipe } from '../pipes/filter.pipe';
 import { ICollectionItem } from '../types/ICollectionItem';
 
+// tslint:disable-next-line: no-conflicting-lifecycle
 @Component({
   selector: 'app-auto-suggest',
   templateUrl: './auto-suggest.component.html',
   styleUrls: ['./auto-suggest.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class AutoSuggestComponent implements OnInit, AfterViewInit {
-
-
-@Input() fieldName: string;
-
+export class AutoSuggestComponent implements OnInit, AfterViewInit, OnChanges, DoCheck, AfterContentInit, OnDestroy {
+  @Input() fieldName: string;
   public _searchText: string = '';
 
   set searchText(value: string) {
@@ -35,10 +33,7 @@ export class AutoSuggestComponent implements OnInit, AfterViewInit {
   public isLoadingResultsFromServer: boolean = false;
   public inputIsOnFocus: boolean = false;
   public lastSearchText: string;
-
-
   public _selectedValue: ICollectionItem;
-
 
   set selectedValue(value: ICollectionItem) {
     this._selectedValue = value;
@@ -55,43 +50,35 @@ export class AutoSuggestComponent implements OnInit, AfterViewInit {
   };
 
   constructor(private filterPipe: FilterPipe, private http: HttpClient) {
+      console.log('Constructor');
+  }
+
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('ng on changes');
+  }
+
+  ngDoCheck(): void {
+    console.log('ng do chgeck');
   }
 
   ngOnInit(): void {
+    console.log('ng on init');
   }
 
-  hasResults(): boolean {
-    return this.results.length > 0;
+  ngAfterContentInit(): void {
+    console.log('ng after content init');
   }
-
-  filteredResults(itemsCollection: ICollectionItem[], caseSensitive: boolean = false): any[] {
-    return this.filterPipe.transform(itemsCollection, this.pipeTextFiltering, caseSensitive);
-  }
-
-  inputOnFocus(): void {
-    this.openResults();
-  }
-
-  inputOnBlur(): void {
-    setTimeout(() => this.inputIsOnFocus = false, 250);
-  }
-
-
-  openResults(): void {
-    this.inputIsOnFocus = true;
-  }
-
-  closeResults(): void {
-    this.inputIsOnFocus = false;
-  }
-
-
+  
   ngAfterViewInit(): void {
+    console.log('ng after view init');
     const searchText$: any = of(this.searchText).pipe(
       debounceTime(this.debounceTiming.typing),
       skipWhile(r => !this.searchText),
       tap(c => console.log(`typing ${this.searchText}`))
     );
+
 
     this.searchTextChanged$.pipe(
       debounceTime(this.debounceTiming.typing)
@@ -124,6 +111,33 @@ export class AutoSuggestComponent implements OnInit, AfterViewInit {
         }
       });
   }
+
+  hasResults(): boolean {
+    return this.results.length > 0;
+  }
+
+  filteredResults(itemsCollection: ICollectionItem[], caseSensitive: boolean = false): any[] {
+    return this.filterPipe.transform(itemsCollection, this.pipeTextFiltering, caseSensitive);
+  }
+
+  inputOnFocus(): void {
+    this.openResults();
+  }
+
+  inputOnBlur(): void {
+    setTimeout(() => this.inputIsOnFocus = false, 250);
+  }
+
+
+  openResults(): void {
+    this.inputIsOnFocus = true;
+  }
+
+  closeResults(): void {
+    this.inputIsOnFocus = false;
+  }
+
+
 
 
   getResultsFromServer(): Observable<any> {
@@ -178,11 +192,14 @@ export class AutoSuggestComponent implements OnInit, AfterViewInit {
     switch ($event.key) {
       case 'ArrowUp':
       case 'ArrowDown':
-        if(this.results.length > 0) {
+        if (this.results.length > 0) {
           $event.preventDefault();
         }
         break;
     }
   }
 
+  ngOnDestroy(): void {
+    console.log('autosuggest destroyed :(');
+  }
 }

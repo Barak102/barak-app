@@ -1,8 +1,8 @@
 <div class="nav-row" [ngClass]="{bottomNavigation: scrollNavigatedBottom}">
   <nav>
     <ul>
-      <li [ngClass]="{active: selectedMenuItem.name === menuItem.name}" *ngFor="let menuItem of menuLinks; let isLast=last"
-          (click)="navigateToLink(menuItem)">{{menuItem.name}}
+      <li [ngClass]="{active: selectedMenuItem.name === menuItem.name}"
+        *ngFor="let menuItem of menuLinks; let isLast=last" (click)="navigateToLink(menuItem)">{{menuItem.name}}
       </li>
     </ul>
   </nav>
@@ -19,11 +19,14 @@
     </div>
   </div>
   <div class="side-menu">
-    Side Content
+    <app-side-bar-content [menuItems]="selectedMenuItem.children" *ngIf="selectedMenuItem.children"></app-side-bar-content>
   </div>
   <div class="container">
-    <div class="section-title">
-{{selectedMenuItem.title}}
+    <div class="section-title" *ngIf="selectedMenuItem.title">
+      <h3>
+        {{selectedMenuItem.title}}
+      </h3>
+      <hr class="separator"/>
     </div>
     <div class="content">
       <router-outlet></router-outlet>
