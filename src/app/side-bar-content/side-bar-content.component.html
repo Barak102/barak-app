@@ -1,7 +1,7 @@
 <div class="menuItems-container" #menuContainer>
     <ul>
-        <li *ngFor="let menuItem of menuItems">
+        <li @fade *ngFor="let menuItem of menuItems; let ind=index" [ngClass]="{'selected': ind === selectedItemIndex }" (click)="menuNavigate(ind)">
             {{menuItem.name}}
         </li>
-    </ul>
+    </ul> 
 </div>

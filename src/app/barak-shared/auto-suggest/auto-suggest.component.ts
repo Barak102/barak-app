@@ -14,7 +14,10 @@ import { ICollectionItem } from '../types/ICollectionItem';
 })
 export class AutoSuggestComponent implements OnInit, AfterViewInit, OnChanges, DoCheck, AfterContentInit, OnDestroy {
   @Input() fieldName: string;
-  public _searchText: string = '';
+  _searchText: string = '';
+
+
+  @Input() placeHolder: string;
 
   set searchText(value: string) {
     this._searchText = value;
@@ -44,13 +47,13 @@ export class AutoSuggestComponent implements OnInit, AfterViewInit, OnChanges, D
   public results: ICollectionItem[] = [];
 
   private debounceTiming: any = {
-    typing: 150, // 500
-    pipe: 2500, // 2000
-    api: 1000, // 2000
+    typing: 150,
+    pipe: 2500,
+    api: 1000,
   };
 
   constructor(private filterPipe: FilterPipe, private http: HttpClient) {
-      console.log('Constructor');
+    console.log('Constructor');
   }
 
 
@@ -70,7 +73,7 @@ export class AutoSuggestComponent implements OnInit, AfterViewInit, OnChanges, D
   ngAfterContentInit(): void {
     console.log('ng after content init');
   }
-  
+
   ngAfterViewInit(): void {
     console.log('ng after view init');
     const searchText$: any = of(this.searchText).pipe(

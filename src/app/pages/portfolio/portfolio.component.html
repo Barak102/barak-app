@@ -1,0 +1,45 @@
+<div class="portfolio-container">
+  <div class="component-item itemSection">
+    <div class="title" #AutoSuggest>
+        <h4>
+            Auto Suggest
+        </h4>
+    </div>
+    <div class="description">
+        This autosuggest has main two steps:
+        first, of all we have the debounceTime using rxjs
+    </div>
+    <div class="component">
+      <app-auto-suggest
+        [fieldName]="'Search Something'"
+        [placeHolder]="'Search Something'"
+        >Search Something</app-auto-suggest>
+    </div>
+  </div>
+  <div class="component-item itemSection">
+    <div class="title" #AutoSuggest>
+        <h4>
+            Slide Gallery
+        </h4>
+    </div>
+    <div class="description">
+        Gallery Slide description
+    </div>
+    <div class="component">
+        <app-gallery-carousel [imageCollection]="imageCollection" [imageIndex]="0" [width]="1024" [height]="768" [transitionTimeInSeconds]="1" [slideIntervalInSeconds]="2" [allowKeyboardSwitch]="true"></app-gallery-carousel>
+    </div>
+  </div>
+  <div class="component-item itemSection">
+    <div class="title" #AutoSuggest>
+        <h4>
+            Graph
+        </h4>
+    </div>
+    <div class="description">
+        Graph
+    </div>
+    <div class="component">
+        <canvas></canvas>
+    </div>
+  </div>
+</div>

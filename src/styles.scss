@@ -2,6 +2,10 @@
 
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+html {
+    scroll-behavior: smooth;
+  }
+
 body {
 margin-top: 30px;
 }

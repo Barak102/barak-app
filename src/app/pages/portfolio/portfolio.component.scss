@@ -1,0 +1,15 @@
+.portfolio-container {
+  height: 3000px;
+
+  .component-item {
+    .title {
+      padding-top: 20px;
+      padding-bottom: 20px;
+      font-size: 30px;
+    }
+    .description {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+  }
+}

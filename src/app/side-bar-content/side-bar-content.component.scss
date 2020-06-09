@@ -24,12 +24,12 @@
             color: #5f4c4c;
             opacity: 0.8;
 
-            &:hover {
+            &:hover,  &.selected {
                 color: #000000;
                 font-size: 20px;
                 text-decoration: underline;
                 opacity: 1;
-                background-color: #ffffff;
+                background-color: #fcfcfc;
                 border: #ededed 1px solid;
                 border-right: 0;
             }

@@ -3,7 +3,7 @@
 
 </div>
 <div class="auto-suggest-input">
-    <input #searchTextInput class="text-input" [(ngModel)]="searchText" (focus)="inputOnFocus()" (blur)="inputOnBlur()" (input)="inputOnFocus()"/>
+    <input #searchTextInput class="text-input" [placeholder]="placeHolder" [(ngModel)]="searchText" (focus)="inputOnFocus()" (blur)="inputOnBlur()" (input)="inputOnFocus()"/>
 </div>
 <app-input-results *ngIf="inputIsOnFocus && (results.length > 0 || isLoadingResultsFromServer) && searchText"
     [textFilter]="pipeTextFiltering" [itemCollection]="results" [displayLoading]="isLoadingResultsFromServer"
