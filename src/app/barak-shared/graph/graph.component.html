@@ -1,0 +1,17 @@
+<div class="canvas-container">
+    <div class="canvas-handler" (mousemove)="checkCordinates($event)" (mouseleave)="mouseLeaveHandler($event)">
+        <div class="detail-square" #square>
+            <div class="details" *ngIf="selectedData">
+                <div class="row">
+                    <div class="data-key">Date</div>
+                    <div class="data-value">{{selectedData.date | date:'dd/MM/yyyy'}}</div>
+                </div>
+                <div class="row">
+                    <div class="data-key">Amount</div>
+                    <div class="data-value">{{selectedData.amount}}</div>
+                </div>
+            </div>
+        </div>
+    <!-- <canvas class="canvas" [width]="width" [height]="height" #canvasLines></canvas> -->
+    <canvas class="canvas" [width]="width" [height]="height" #canvasElement></canvas>
+</div>

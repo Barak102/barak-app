@@ -1,83 +1,96 @@
 @import "./../styles/shared-mixins";
+
 :host {
   @include dimention(100%);
 }
+
 .gallery {
   width: 100%;
   border: rgba(107, 103, 103, 0.3) 1px solid;
+
   .container {
     @include dimention(100%);
     @include flex();
-    .arrow-left {
-      cursor: pointer;
-      width: 50px;
-      height: 768px;
-      position: absolute;
-      @include flex();
-      z-index: 2;
-      font-size: 30px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-weight: bold;
 
-      &:hover {
-        background: rgba(107, 103, 103, 0.3);
-        color: white;
-      }
-    }
-    .arrow-right {
-      width: 50px;
-      height: 768px;
-      position: absolute;
-      @include flex();
-      z-index: 2;
-      cursor: pointer;
-      font-size: 30px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-weight: bold;
-      &:hover {
-        background: rgba(107, 103, 103, 0.3);
-        color: white;
-      }
-    }
     .carousel {
       @include flex(center);
       @include dimention(100%, 75%);
       overflow: hidden;
+
       .image-items {
         @include flex();
       }
+
     }
-    .title-and-buttons {
-      position: absolute;
-      padding-top: 25%;
+
+    .commands-container {
       z-index: 2;
-      .title {
-        // position: absolute;
-        color: #f5f5f5;
-        text-shadow: 3px 3px #000000;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      pointer-events: none;
+      padding-left: 50px;
+      padding-right: 50px;
+      position: absolute;
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      width: 1024px;
+
+
+      .arrow-left, .arrow-right {
+        @include flex();
+        pointer-events: all;
+        cursor: pointer;
+        width: 50px;
+        height: 768px;
+        z-index: 2;
         font-size: 30px;
-        &.switch {
-          filter: blur(3px);
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+
+        &:hover {
+          background: rgba(107, 103, 103, 0.3);
+          color: white;
         }
       }
-      .buttons {
-        @include flex(center);
-        margin-top: 20px;
-        ul {
-          display: inline-flex;
-          list-style: circle;
-          .image-button {
-            padding-left: 5px;
-            font-size: 40px;
-            color: #f5f5f5;
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            cursor: pointer;
-            padding-right: 5px;
-            width: 10px;
-            &.selected {
-              list-style: disc;
-            }
+    }
+
+  }
+
+  .title-and-buttons {
+    position: absolute;
+    padding-top: 25%;
+    z-index: 2;
+
+    .title {
+      // position: absolute;
+      color: #f5f5f5;
+      text-shadow: 3px 3px #000000;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 30px;
+
+      &.switch {
+        filter: blur(3px);
+      }
+    }
+
+    .buttons {
+      @include flex(center);
+      margin-top: 20px;
+
+      ul {
+        display: inline-flex;
+        list-style: circle;
+
+        .image-button {
+          padding-left: 5px;
+          font-size: 40px;
+          color: #f5f5f5;
+          font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+          cursor: pointer;
+          padding-right: 5px;
+          width: 10px;
+
+          &.selected {
+            list-style: disc;
           }
         }
       }

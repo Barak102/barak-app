@@ -53,29 +53,29 @@ export class AutoSuggestComponent implements OnInit, AfterViewInit, OnChanges, D
   };
 
   constructor(private filterPipe: FilterPipe, private http: HttpClient) {
-    console.log('Constructor');
+    //onsole.log('Constructor');
   }
 
 
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('ng on changes');
+    //console.log('ng on changes');
   }
 
   ngDoCheck(): void {
-    console.log('ng do chgeck');
+    //console.log('ng do chgeck');
   }
 
   ngOnInit(): void {
-    console.log('ng on init');
+    //console.log('ng on init');
   }
 
   ngAfterContentInit(): void {
-    console.log('ng after content init');
+    //console.log('ng after content init');
   }
 
   ngAfterViewInit(): void {
-    console.log('ng after view init');
+    //console.log('ng after view init');
     const searchText$: any = of(this.searchText).pipe(
       debounceTime(this.debounceTiming.typing),
       skipWhile(r => !this.searchText),
@@ -87,7 +87,7 @@ export class AutoSuggestComponent implements OnInit, AfterViewInit, OnChanges, D
       debounceTime(this.debounceTiming.typing)
     ).subscribe(r => {
       this.isLoadingResultsFromServer = false;
-      console.log(`Typing text: ${this.searchText}`);
+      //console.log(`Typing text: ${this.searchText}`);
       if (this.results.length > 0) {
         this.pipeSubscribe$.next(r);
       } else {
@@ -100,14 +100,14 @@ export class AutoSuggestComponent implements OnInit, AfterViewInit, OnChanges, D
     this.pipeSubscribe$.pipe(
       tap(val => {
         this.pipeTextFiltering = val;
-        console.log(`filtering text: ${this.pipeTextFiltering}`);
+        //console.log(`filtering text: ${this.pipeTextFiltering}`);
       }),
       debounceTime(this.debounceTiming.pipe),
     )
       .subscribe(val => {
         this.pipeTextFiltering = val;
         if (this.pipeTextFiltering && !this.isLoadingResultsFromServer) {
-          console.log('go to server search after filtering');
+          //console.log('go to server search after filtering');
           this.getResultsFromServer().subscribe(results => {
             this.resolveResults(results);
           });
@@ -165,7 +165,7 @@ export class AutoSuggestComponent implements OnInit, AfterViewInit, OnChanges, D
   }
 
   resolveResults(results: ICollectionItem[]): void {
-    console.log('Get results from server');
+    //console.log('Get results from server');
     if (this.filteredResults(results).length === 0) {
       this.results = results;
     } else {
@@ -174,7 +174,7 @@ export class AutoSuggestComponent implements OnInit, AfterViewInit, OnChanges, D
         const currentItem: ICollectionItem = results[ind];
         const includesInResults: number = this.results.findIndex(item => item.name === currentItem.name);
         if (includesInResults === -1) {
-          console.log(`pushing ${currentItem}`);
+          //console.log(`pushing ${currentItem}`);
           this.results.push(currentItem);
         }
       }
@@ -203,6 +203,6 @@ export class AutoSuggestComponent implements OnInit, AfterViewInit, OnChanges, D
   }
 
   ngOnDestroy(): void {
-    console.log('autosuggest destroyed :(');
+    //console.log('autosuggest destroyed :(');
   }
 }

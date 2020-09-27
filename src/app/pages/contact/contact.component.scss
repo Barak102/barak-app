@@ -1,0 +1,54 @@
+.contact-container {
+  .row {
+    padding: 10px;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    font-size: 24px;
+
+    .field-name {
+        margin-bottom: 10px;
+    }
+
+    .field-input {
+      .text-input {
+        width: 450px;
+        height: 30px;
+        padding-left: 10px;
+        border-radius: 5px;
+        border: #000000 1px solid;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        font-size: 24px;
+        &:focus {
+          outline: none;
+        }
+      }
+      .textarea-input {
+          min-width: 450px;
+          height: 250px;
+          min-height: 250px;
+          max-width: 40vw;
+          padding-left: 10px;
+          border-radius: 5px;
+          border: #000000 1px solid;
+          font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+          font-size: 20px;
+          &:focus {
+            outline: none;
+          }
+      }
+    }
+    .buttons-field {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .submit-button, .reset-button {
+            width: 200px;
+            height: 50px;
+            padding: 10px;
+            font-size: 24px;
+        }
+        .reset-button {
+            margin-left: 20px;
+        }
+    }
+  }
+}

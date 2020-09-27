@@ -9,7 +9,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   styleUrls: ['./app.component.scss'],
   animations: [
     trigger('paddingTop', [
-      state('void', style({paddingTop: '50px'})),
+      state('void', style({ paddingTop: '50px' })),
       transition('void => *', [
         animate(1000)
       ])
@@ -34,42 +34,43 @@ export class AppComponent implements OnInit, AfterViewInit {
       name: 'Portfolio', navigateTo: 'portfolio', isSelected: false, title: 'My Portfolio',
       children: [
         {
-        name: 'Auto Suggest',
-        navigateTo: '',
-        isSelected: false,
-        linkType: LinkType.Jump
-      },
-      {
-        name: 'Slide Gallery',
-        navigateTo: '',
-        isSelected: false,
-        linkType: LinkType.Jump
-      },
-      {
-        name: 'Survey (by Dates + Quantety)',
-        navigateTo: '',
-        isSelected: false,
-        linkType: LinkType.Jump
-      },
-      {
-        name: 'Graph',
-        navigateTo: '',
-        isSelected: false,
-        linkType: LinkType.Jump
-      },
-      {
-        name: 'Calendar',
-        navigateTo: '',
-        isSelected: false
-      },
-      {
-        name: 'Gallery',
-        navigateTo: '',
-        isSelected: false
-      },
-    ]
+          name: 'Auto Suggest',
+          navigateTo: '',
+          isSelected: false,
+          linkType: LinkType.Jump
+        },
+        {
+          name: 'Slide Gallery',
+          navigateTo: '',
+          isSelected: false,
+          linkType: LinkType.Jump
+        },
+        {
+          name: 'Graph',
+          navigateTo: '',
+          isSelected: false,
+          linkType: LinkType.Jump
+        },
+        {
+          name: 'Survey (by Dates + Quantety)',
+          navigateTo: '',
+          isSelected: false,
+          linkType: LinkType.Jump
+        },
+        {
+          name: 'Calendar',
+          navigateTo: '',
+          isSelected: false
+        },
+        {
+          name: 'Gallery',
+          navigateTo: '',
+          isSelected: false
+        },
+      ]
     },
     { name: 'Articles', navigateTo: 'articles', isSelected: false, title: 'Articles' },
+    {name: 'Programming Group', navigateTo: 'group', isSelected: false, title: 'Programming Group', children: this.getGroupLinksFromFacebook()},
     { name: 'Contact', navigateTo: 'contact', isSelected: false, title: 'Contract me' },
   ];
 
@@ -90,6 +91,10 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.resolveSectionTitlePosition();
   }
 
+  getGroupLinksFromFacebook(): IMenuItem[] {
+    return [{name: 'Take Responsibility for your own Programming', navigateTo: '', isSelected: false, linkType: LinkType.Http, children: []}];
+  }
+
   routeEvent(router: Router) {
     router.events.subscribe(e => {
       if (e instanceof NavigationEnd) {
@@ -103,7 +108,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   navigateToLink(menuItem: IMenuItem): void {
     this.menuLinks.forEach(i => i.isSelected = false);
-    console.log(`Navigating to ${menuItem.navigateTo}`);
+    //console.log(`Navigating to ${menuItem.navigateTo}`);
     menuItem.isSelected = true;
     this.selectedMenuItem = menuItem;
     this.pageSubTitle = '';
@@ -113,8 +118,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   resolveSectionTitlePosition(): void {
     const bodyTop: number = document.body.getClientRects()[0].top;
     const needToMarginBanner: boolean = bodyTop <= -155 && bodyTop < 0;
-    if(needToMarginBanner) { 
-      const newMargin: number =  -150 - bodyTop;
+    if (needToMarginBanner) {
+      const newMargin: number = -150 - bodyTop;
       this.bannerElement.nativeElement.style.marginTop = newMargin + 'px';
     } else {
       this.bannerElement.nativeElement.style.marginTop = 0 + 'px';

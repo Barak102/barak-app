@@ -19,24 +19,8 @@ export class PortfolioComponent implements OnInit, AfterViewInit {
   ];
 
   constructor() { }
+  
   ngAfterViewInit(): void {
-    const x = document.querySelector('canvas');
-    x.style.width  = '800px';
-    x.style.height  = '800px';
-    const can = x.getContext('2d');
-    can.beginPath();
-    can.moveTo(10, 20);
-    can.lineTo(20, 30);
-    can.lineTo(30, 0);
-    can.lineTo(90, 80);
-    can.lineTo(120, 100);
-    can.lineTo(150, 110);
-    can.lineTo(190, 70);
-    can.lineTo(200, 90);
-    can.lineTo(220, 70);
-    can.lineTo(260, 20);
-    can.strokeStyle = '#000000';
-    can.stroke();
   }
 
   ngOnInit(): void {

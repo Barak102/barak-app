@@ -1,0 +1,39 @@
+.canvas-container {
+  .canvas-handler {
+    position: absolute;
+    width: 800px;
+    height: 600px;
+    z-index: 3;
+    .detail-square {
+        position: relative;
+        top: 40px;
+        left: 50px;
+        background-color: #c0c0c0;
+        display: flex;
+        width: 200px;
+        border: #000000 1px solid;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        color:brown;
+        .details {
+            width: 200px;
+            .row {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                .data-key {
+                    width: 100px;
+                }
+                .data-value {
+
+                }
+            }
+        }
+    }
+  }
+  .canvas {
+    position: absolute;
+    z-index: 2;
+  }
+}

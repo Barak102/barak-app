@@ -72,7 +72,6 @@ export class InputResultsComponent implements OnInit {
   changeIndex(ind: number): void {
     if (ind < this.itemCollectionFiltered().length && ind > -1 && !this.mouseEntered) {
       this.selectedIndex = ind;
-      console.log(`Selected index: ${this.selectedIndex}`);
     }
   }
 

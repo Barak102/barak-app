@@ -1,12 +1,10 @@
 <div class="gallery">
   <div class="container" (mouseenter)="this.stopSlide()" (mouseleave)="continueSlide()">
-    <div class="arrow-left" (click)="previousImage()" #arrowLeft>
-      &#60;
-    </div>
-    <div class="carousel">
+
+    <div class="carousel" #carousel>
       <div class="image-items" #imageItems>
         <img
-        [ngClass]="{'selected-image': i === this.imageIndex }" draggable="false"
+          [ngClass]="{'selected-image': i === this.imageIndex }" draggable="false"
           class="image-item"
           *ngFor="let image of imageCollection; let i = index"
           [src]="image.image"
@@ -15,17 +13,22 @@
         />
       </div>
     </div>
-    <div class="arrow-right" (click)="nextImage()" #arrowRight>
-      &#62;
-    </div>
+      <div class="commands-container" #commandsContainer>
+        <div class="arrow-left" (click)="previousImage()" #arrowLeft>
+          &#60;
+        </div>
+        <div class="arrow-right" (click)="nextImage()" #arrowRight>
+          &#62;
+        </div>
+      </div>
     <div class="title-and-buttons">
       <div class="title">
         {{title}}
-    </div>
+      </div>
       <div class="buttons">
         <ul>
           <li class="image-button" *ngFor="let item of imageCollection; let i = index"
-          (click)="setImageIndex(i)" [ngClass]="{'selected': imageIndex === i}"></li>
+              (click)="setImageIndex(i)" [ngClass]="{'selected': imageIndex === i}"></li>
         </ul>
       </div>
     </div>

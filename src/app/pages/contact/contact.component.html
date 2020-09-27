@@ -1,1 +1,42 @@
-<p>contact works!</p>
+<div class="contact-container">
+    <form>
+        <div class="row" @nameFadeIn>
+        <div class="field-name">
+            Full Name(*)
+        </div>
+        <div class="field-input">
+            <input type="text" class="text-input"/>
+        </div>    
+        </div>
+        <div class="row" @emailFadeIn>
+        <div class="field-name">
+            Email(*)
+        </div>
+        <div class="field-input">
+            <input type="email" class="text-input"/>
+        </div>    
+        </div>
+        <div class="row" @phoneFadeIn>
+        <div class="field-name">
+            Phone Number(*)
+        </div>
+        <div class="field-input">
+            <input type="text" class="text-input"/>
+        </div>    
+        </div>
+        <div class="row"  @messageFadeIn>
+        <div class="field-name">
+            Message(*)
+        </div>
+        <div class="field-input">
+            <textarea class="textarea-input"></textarea>
+        </div>    
+        </div>
+        <div class="row">
+            <div class="buttons-field">
+                <input type="submit" value="Send" class="submit-button"/>
+                <input type="reset" value="Reset" class="reset-button" (click)="resetCommand()"/>
+            </div>
+        </div>
+    </form>
+</div>

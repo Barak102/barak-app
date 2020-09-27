@@ -1,8 +1,12 @@
-<div class="nav-row" [ngClass]="{bottomNavigation: scrollNavigatedBottom}">
+<div class="nav-row" [ngClass]="{ bottomNavigation: scrollNavigatedBottom }">
   <nav>
     <ul>
-      <li [ngClass]="{active: selectedMenuItem.name === menuItem.name}"
-        *ngFor="let menuItem of menuLinks; let isLast=last" (click)="navigateToLink(menuItem)">{{menuItem.name}}
+      <li
+        [ngClass]="{ active: selectedMenuItem.name === menuItem.name }"
+        *ngFor="let menuItem of menuLinks; let isLast = last"
+        (click)="navigateToLink(menuItem)"
+      >
+        {{ menuItem.name }}
       </li>
     </ul>
   </nav>
@@ -10,7 +14,10 @@
 <div class="main-grid">
   <div class="left-panel">
     <div class="side-menu">
-      <app-side-bar-content [menuItems]="selectedMenuItem.children" (subMenuChanged)="setSubTitleHandler($event)"></app-side-bar-content>
+      <app-side-bar-content
+        [menuItems]="selectedMenuItem.children"
+        (subMenuChanged)="setSubTitleHandler($event)"
+      ></app-side-bar-content>
     </div>
   </div>
   <div class="right-panel">
@@ -25,9 +32,11 @@
       </div>
       <div class="section-title" *ngIf="selectedMenuItem.title">
         <h3>
-          {{selectedMenuItem.title + (pageSubTitle ? ' - '+pageSubTitle : '' )  }}
+          {{
+            selectedMenuItem.title + (pageSubTitle ? " - " + pageSubTitle : "")
+          }}
         </h3>
-        <hr class="separator"/>
+        <hr class="separator" />
       </div>
     </div>
     <div class="container">
@@ -36,11 +45,9 @@
       </div>
     </div>
   </div>
-
-
 </div>
-    <div class="footer-row">
-      <footer>
-        Footer
-      </footer>
-    </div>
+<footer>
+  <div class="footer-row">
+    Barak Josef All Right Recieved 2020 ©
+  </div>
+</footer>

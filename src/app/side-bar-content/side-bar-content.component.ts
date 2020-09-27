@@ -1,6 +1,7 @@
 import { IMenuItem, LinkType } from './../barak-shared/types/IMenuItem';
 import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, HostListener, Output, EventEmitter } from '@angular/core';
 import { trigger, style, animate, state, transition } from '@angular/animations';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-side-bar-content',
@@ -48,7 +49,6 @@ export class SideBarContentComponent implements OnInit, AfterViewInit {
   resolveSelectedMenuItem(): void {
     const sections: HTMLCollectionOf<Element> = document.getElementsByClassName('itemSection');
     let selectedMenuItem: number = null;
-    console.log(sections[0].getClientRects()[0].top);
     for (let i = 0; i < sections.length; i++) {
       const sectionTop: number = sections[i].getClientRects()[0].top;
       if (sectionTop <= 100) {
@@ -63,14 +63,14 @@ export class SideBarContentComponent implements OnInit, AfterViewInit {
 
   menuNavigate(menuIndex: number): void {
     const menuItem = this.menuItems[menuIndex];
-    console.log(window.scrollY);
     switch (menuItem.linkType) {
       case 0:
         let scrollTo = 0;
         for (let i = 0; i < menuIndex; i++) {
           scrollTo += document.getElementsByClassName('itemSection')[i].clientHeight;
         }
-        window.scrollTo(0, scrollTo + 270);
+        $('html, body').stop().animate({scrollTop: scrollTo + 270}, 1000, 'swing');
+        //window.scrollTo(0, scrollTo + 270);
         break;
     }
   }

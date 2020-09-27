@@ -1,7 +1,7 @@
-import { ImageItem } from './../models/image-item/image-item';
-import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
-import { fromEvent } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import {ImageItem} from './../models/image-item/image-item';
+import {AfterViewInit, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {fromEvent} from 'rxjs';
+import {switchMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-gallery-carousel',
@@ -33,8 +33,11 @@ export class GalleryCarouselComponent implements OnInit, AfterViewInit, OnDestro
 
   @ViewChild('imageItems', null) imageItems: ElementRef;
 
+  @ViewChild('carousel', null) carouselElement: ElementRef;
   @ViewChild('arrowLeft', null) arrowLeft: ElementRef;
   @ViewChild('arrowRight', null) arrowRight: ElementRef;
+
+  @ViewChild('commandsContainer', null) commandsContainer: ElementRef;
 
   interval: any;
 
@@ -44,7 +47,9 @@ export class GalleryCarouselComponent implements OnInit, AfterViewInit, OnDestro
   translateXPercentage: number = 0;
   currentTranslateXPercentage: number = 0;
   imageHolded: boolean = false;
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
@@ -56,16 +61,16 @@ export class GalleryCarouselComponent implements OnInit, AfterViewInit, OnDestro
 
     fromEvent(document.getElementsByClassName('selected-image')[0], 'mousedown').pipe(tap(() => this.imageHolded = true),
       switchMap(() => fromEvent(document, 'mouseup'))).subscribe(() => {
-        this.imageHolded = false;
-      });
+      this.imageHolded = false;
+    });
 
     fromEvent(document, 'mousemove').subscribe((x: any) => {
-      if (this.imageHolded) {
-        const imageItemsWidth = this.imageItems.nativeElement.getClientRects()[0].width;
-        const transformAmount: number = 100 / (imageItemsWidth / this.width) * this.imageIndex;
-        this.imageItems.nativeElement.style.transform = `translateX(${(this.translateXPercentage - transformAmount)}%)`;
+        if (this.imageHolded) {
+          const imageItemsWidth = this.imageItems.nativeElement.getClientRects()[0].width;
+          const transformAmount: number = 100 / (imageItemsWidth / this.width) * this.imageIndex;
+          this.imageItems.nativeElement.style.transform = `translateX(${(this.translateXPercentage - transformAmount)}%)`;
+        }
       }
-    }
     );
     fromEvent(document, 'keyup').subscribe((k: any) => {
       if (this.allowKeyboardSwitch) {
@@ -80,9 +85,11 @@ export class GalleryCarouselComponent implements OnInit, AfterViewInit, OnDestro
       }
     });
   }
+
   resolveArrowsPositions(): void {
-    this.arrowLeft.nativeElement.style.marginLeft=`${(-(this.width) / 2) - 25}px`;
-    this.arrowRight.nativeElement.style.marginLeft=`${(this.width / 2) + 25}px`;
+    this.commandsContainer.nativeElement.style.width = `${this.carouselElement.nativeElement.getClientRects()[0].width}px`;
+    //this.arrowLeft.nativeElement.style.marginLeft = `${(-(this.width) / 2) - 25}px`;
+    //this.arrowRight.nativeElement.style.marginLeft = `${(this.width / 2) + 25}px`;
   }
 
 
@@ -103,6 +110,11 @@ export class GalleryCarouselComponent implements OnInit, AfterViewInit, OnDestro
 
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.resolveArrowsPositions();
+  }
+
   moveImage(): void {
     const imageItemsWidth = this.imageItems.nativeElement.getClientRects()[0].width;
     const transformAmount: number = 100 / (imageItemsWidth / this.width) * this.imageIndex;
@@ -120,6 +132,7 @@ export class GalleryCarouselComponent implements OnInit, AfterViewInit, OnDestro
     }
     this.moveImage();
   }
+
   previousImage(): void {
     if (this.imageIndex - 1 >= 0) {
       this.imageIndex--;
@@ -140,11 +153,13 @@ export class GalleryCarouselComponent implements OnInit, AfterViewInit, OnDestro
       this.interval = null;
     }
   }
+
   continueSlide(): void {
     if (!this.interval && this.slideIntervalInSeconds > 0) {
       this.interval = setInterval(() => this.nextImage(), this.slideIntervalInSeconds * 1000);
     }
   }
+
   ngOnDestroy(): void {
     this.stopSlide();
   }

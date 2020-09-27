@@ -13,6 +13,7 @@ import { BarakSharedModule } from './barak-shared/barak-shared.module';
 import { FilterPipe } from './barak-shared/pipes/filter.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SideBarContentComponent } from './side-bar-content/side-bar-content.component';
+import { ProgrammingGroupComponent } from './pages/programming-group/programming-group.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { SideBarContentComponent } from './side-bar-content/side-bar-content.com
     ArticlesComponent,
     ContactComponent,
     SideBarContentComponent,
+    ProgrammingGroupComponent,
   ],
   imports: [
     BrowserModule,

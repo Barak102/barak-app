@@ -9,12 +9,14 @@ import {FilterPipe} from './pipes/filter.pipe';
 import {MatProgressSpinnerModule, MatSpinner} from '@angular/material/progress-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GalleryCarouselComponent } from './gallery-carousel/gallery-carousel.component';
+import { GraphComponent } from './graph/graph.component';
 @NgModule({
   declarations: [
     AutoSuggestComponent,
     InputResultsComponent,
     GalleryCarouselComponent,
-    FilterPipe
+    FilterPipe,
+    GraphComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,7 @@ import { GalleryCarouselComponent } from './gallery-carousel/gallery-carousel.co
     HttpClientModule,
     MatProgressSpinnerModule,
   ],
-  exports: [AutoSuggestComponent, FilterPipe, GalleryCarouselComponent]
+  exports: [AutoSuggestComponent, FilterPipe, GalleryCarouselComponent, GraphComponent]
 })
 export class BarakSharedModule {
 }
